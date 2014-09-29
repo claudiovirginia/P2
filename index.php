@@ -9,16 +9,16 @@
 <body>
 	<div class="container">
 			<!-- <div class="main">-->
-			<h2>Password Generator</h2>
+			<h2>Password Generator using xkcd methodology.</h2>
 			<form action="index.php" method="post">
 				<div>
 					<fieldset>			
-						<label class="heading">Make your selection</label><br/><br/>
-						<input type="checkbox" name="checkNumber[]" value="Include a number" CHECKED><label>Include a number</label><br/>
-						<input type="checkbox" name="checkSymbol[]" value="Include a symbol" CHECKED><label>Include a special symbol</label><br/>
+						<label class="heading">Please make your selection</label><br/><br/>
+						<input type="checkbox" name="checkNumber" value="Include a number" CHECKED><label>Include a Number</label><br/>
+						<input type="checkbox" name="checkSymbol" value="Include a symbol" CHECKED><label>Include a Symbol</label><br/>
 					</fieldset>
 					<fieldset>	
-						<label for="min-words">How many words to use </label>
+						<label for="min-words">Please select the number of words to use  </label>
 						<select id="minNumber" name="minNumber">                      
 							<option value="0">--Select Number--</option>
 							<option value="1">1</option>
@@ -34,21 +34,22 @@
 					</fieldset>		
 					<br/>
 					
+					<!----- submit button --->
 					<input type="submit" name="submit" Value="Submit Query"/>
 					
 					<!----- Including PHP Script ----->
-					<?php require 'passwordlogic.php';?>
+					<?php require 'logic.php';?>
 					
 					<!----- output ----->
-					<h3>The number selected (if any) is:			 <?php echo @($num); ?> </h3>
-					<h3>The symbol selected (if any) is: 			 <?php echo @($sym); ?> </h3>
-					<h3>The random words generated are:				 <?php echo @($words); ?> </h3>
-					<h3>The upper case converion of these words:	 <?php echo @($allUpperCase); ?> </h3>
-					<h3>The dashes added to these words are: 		 <?php echo @($dashes); ?> </h3>
-					<h3>The camelcase conversion for these words is: <?php echo @($camelCase); ?> </h3>
-					<h3>The first letter of each word upper case is: <?php echo @($lowerCase); ?> </h3>
-					
-					<!--<h3>Your final password is:   <?php echo @($finalPwd); ?> </h3>-->
+					<h4>The number generated (if any) is:			 <?php echo @($num); ?> </h4>
+					<h4>The symbol generated (if any) is: 			 <?php echo @($sym); ?> </h4>
+					<h4>The random words generated are:				 <?php echo @($words); ?> </h4>
+					<h4>The upper case converion of these words:	 <?php echo @($allUpperCase); ?> </h4>
+					<h4>The upper case conversion of first word is:  <?php echo @($lowerCase); ?> </h4>
+					<h4>The dashes added to these words are: 		 <?php echo @($dashes); ?> </h4>
+					<h4>The camelcase conversion for these words is: <?php echo @($camelCase); ?> </h4>
+						
+					<!--Your final password is: -->
 					<h3><fieldset>	
 						<label>Your final password is: </label><input type="text" name="pwd"  size="70" value = <?php echo @($finalPwd); ?> > <br/>
 						</fieldset>
