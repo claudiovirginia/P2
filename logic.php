@@ -1,5 +1,9 @@
 <?php 
 
+	error_reporting (E_ALL);
+	ini_set('display_errors',1);
+
+
 // http://en.wikipedia.org/wiki/Most_common_words_in_English
 
 
@@ -16,6 +20,9 @@ if(isset($_POST['submit']))
 	if(!empty($_POST['minNumber'])) {	
 		$number = $_POST['minNumber'];
 	}
+	if(!empty($_POST['minChars'])) {	
+		$specialChars = $_POST['minChars'];
+	}
 	
 	//local variables
 	$numeric = "0123456789";
@@ -29,6 +36,7 @@ if(isset($_POST['submit']))
 	$sym = "";
 	$num = "";
 	$finalPwd = "";
+	$upperEachWord = "";
 	
 	//if (isset($_POST['checkedNumber']) && $_POST['checkedNumber'] == 'on')
 	if (!empty($checkedNumber)) {
@@ -42,6 +50,11 @@ if(isset($_POST['submit']))
 		$sym  = rtrim($sym);
 	}	
 	
+	if (!empty($specialChars)) {
+		$dataSpecChars = getPW ($symbol, $specialChars);
+	}
+		
+	
 	if(!empty($_POST['minNumber'])) {	
 	
 		$number = $_POST['minNumber'];
@@ -52,7 +65,15 @@ if(isset($_POST['submit']))
 		
 		//ucfirst — Make a string's first character uppercase
 		$lowerCase = ucfirst($words);  
+		
+		//make the first letter of each word uppercase 
+		$arr = explode(" ", $words);
+		$result = array();
+		for($i = 0; $i < count($arr); $i++) {
+			$upperEachWord .= ucfirst($arr[$i])." ";
+		}
 				
+		
 		//php predefined funcion to convert strings to upper case		
 		$allUpperCase = strtoupper($lowerCase);
 		
