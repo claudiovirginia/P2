@@ -1,20 +1,12 @@
 <?php 
 
-	error_reporting (E_ALL);
-	ini_set('display_errors',1);
-
-
-// http://en.wikipedia.org/wiki/Most_common_words_in_English
-
-
+	
 if(isset($_POST['submit']))
 {
     if(!empty($_POST['checkNumber'])) {
-		// remove count
 		$checkedNumber = $_POST['checkNumber'];
 	}
 	if(!empty($_POST['checkSymbol'])) {
-		// remove count
 		$checkedSymbol =  $_POST['checkSymbol'];
 	}
 	if(!empty($_POST['minNumber'])) {	
@@ -26,10 +18,8 @@ if(isset($_POST['submit']))
 	
 	//local variables
 	$numeric = "0123456789";
-	$symbol = "&*()!@$#*%";	
+	$symbol = "^+&*()!@$#*%";	
 	$one = 1;
-	
-	//$chars = "";
 	$lowerCase = "";
 	$allUpperCase = "";
 	$camelCase = "";
@@ -38,7 +28,6 @@ if(isset($_POST['submit']))
 	$finalPwd = "";
 	$upperEachWord = "";
 	
-	//if (isset($_POST['checkedNumber']) && $_POST['checkedNumber'] == 'on')
 	if (!empty($checkedNumber)) {
 		$chars = $numeric;
 		$num = getPW ($chars, $one);
@@ -59,7 +48,7 @@ if(isset($_POST['submit']))
 	
 		$number = $_POST['minNumber'];
 		
-		//calling a function to get 'X' number of words at random from an array of English words
+		//calling a function to get 'n' number of words at random from an array of English words
 		//the number is selected from the user from a drop down list
 		$words = getWords($number);
 		
@@ -84,7 +73,7 @@ if(isset($_POST['submit']))
 		$camelCase = dashesToCamelCase($words);
 				
 		//final password, concatening number + symbols to words
-		$finalPwd .= $dashes."-".$num."-".$sym	;
+		$finalPwd .= $dashes.$num.$sym.$dataSpecChars;
 							
 	}
 		
@@ -98,11 +87,11 @@ if(isset($_POST['submit']))
 		return $pw;
 	}
 	
-	//This function contains an array of 30 English words and returns 'X' number of words depending of the myLength value
+	//This function contains an array of 40 English words and returns 'X' number of words depending of the myLength value. I got this list from the following site: http://en.wikipedia.org/wiki/Most_common_words_in_English
 	function getWords($mylength) { 
 	
 		$months = array ('time','person','year','way','day','thing','man','world','life','hand','part','child','eye','woman','place','work','week','case','point','government','company',
-						 'number','group','problem','fact','be','have','do','say','get');
+						 'number','group','problem','fact','be','have','do','say','get','make','go','know','good','first','last','long','great','little','own','other');
 		$data = "";		
 		for($j = 0; $j < $mylength; $j++) {  
 			$data = $data.$months[rand (0, count($months) - 1)]." ";		
@@ -120,12 +109,11 @@ if(isset($_POST['submit']))
 	}
 	
 	//This function add dashes to a string of words
-	function stringToDashes($text) {
-		$text = strtolower(htmlentities($text)); 
-		$text = str_replace(get_html_translation_table(), "-", $text);
-		$text = str_replace(" ", "-", $text);
-		$text = preg_replace("/[-]+/i", "-", $text);
-		return $text;
+	function stringToDashes($str) {
+		$str = str_replace(get_html_translation_table(), "-", strtolower(htmlentities($str)));
+		$str = str_replace(" ", "-", $str);
+		$str = preg_replace("/[-]+/i", "-", $str);
+		return $str;
 	}
 		
 		

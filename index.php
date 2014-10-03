@@ -8,9 +8,8 @@
 </head>
 <body>
 	<div class="container">
-			<!-- <div class="main">-->
-			<h2>Password Generator using xkcd methodology.</h2>
-			<!-- new -->
+			
+			<h3>Password Generator using xkcd methodology</h3>
 			<P>
 				<ul>
 					<li>What is this? </li>
@@ -25,37 +24,26 @@
 				<div>
 					<fieldset>			
 						<label class="heading">Please make your selection</label><br/><br/>
-						<input type="checkbox" name="checkNumber" value="Include a number" CHECKED><label>Include a Number</label><br/>
-						<input type="checkbox" name="checkSymbol" value="Include a symbol" CHECKED><label>Include a Symbol</label><br/>
-						
-						<!--new -->
+						<input type="checkbox" name="checkNumber" value="Include a number" CHECKED><label>Would you like to include a number?</label><br/>
+						<input type="checkbox" name="checkSymbol" value="Include a symbol" CHECKED><label>Would you like to include a symbol?</label><br/>
 						<label for="min-chars">Please select the number of special characters to use</label>
 						<select id="minChars" name="minChars">                      
-							<option value="0">--Select Number--</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
+							<?php
+								$values = array ('1','2','3','4','5','6','7');
+								foreach($values as $minChars){
+									echo '<option value="'.$minChars.'"'.($_POST['minChars']==$minChars?' selected="selected"':'').'>'.$minChars.'</option>';
+								}
+							?>
 						</select>
-						
-					</fieldset>
-					<fieldset>	
+						<br/>
 						<label for="min-words">Please select the number of words to use  </label>
 						<select id="minNumber" name="minNumber">                      
-							<option value="0">--Select Number--</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
+							<?php
+								$values = array ('1','2','3','4','5','6','7','8','9');
+								foreach($values as $minNumber){
+									echo '<option value="'.$minNumber.'"'.($_POST['minNumber']==$minNumber?' selected="selected"':'').'>'.$minNumber.'</option>';
+								}
+							?>
 						</select>
 					</fieldset>		
 					<br/>
@@ -69,8 +57,7 @@
 					<!----- output ----->
 					<h4>The number generated (if any) is:			  <?php echo @($num); ?> </h4>
 					<h4>The symbol generated (if any) is: 			  <?php echo @($sym); ?> </h4>
-					<h4>The special characters (if any) selected are: <?php echo @($dataSpecChars); ?> </h4>
-					
+					<h4>The special characters generated are: 		  <?php echo @($dataSpecChars); ?> </h4>
 					<h4>The random words generated in lower case: 	  <?php echo @($words); ?> </h4>
 					<h4>The upper case converion of these words:	  <?php echo @($allUpperCase); ?> </h4>
 					<h4>The upper case conversion of first word is:   <?php echo @($lowerCase); ?> </h4>
@@ -80,17 +67,13 @@
 						
 					<!--Your final password is: -->
 					<h3><fieldset>	
-							<label>Your final password is:    </label><input type="text" name="pwd"   size="70" value = <?php echo @($finalPwd); ?> > 
+							<label>Your final password is:    </label><input type="text" name="pwd"   size="80" value = <?php echo @($finalPwd); ?> > 
 							<label>Its size in characters is: </label><input type="text" name="size"  size="5"  value = <?php echo @strlen(($finalPwd)); ?> >
 						</fieldset>
 					</h3>
-								
-								
 				</div>	
 			</form>
 	</div>
-	
-	
 	
 </body>
 </html>
